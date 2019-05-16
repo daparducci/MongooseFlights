@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>All Flights</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Flight Number</th>
+        <th>Departure</th>
+        <th>Airline</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% flights.forEach(function(m) { %>
+        <tr>
+          <td><%= m.flightNo %></td>
+          <td><%= m.departs %></td>
+          <td><%= m.airline %></td>
+          <td><%= m.date %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
