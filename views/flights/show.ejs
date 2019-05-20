@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+
     <section id="show-page">
         <div>Airport: </div>
         <div><%= flight.airport %></div>
@@ -17,6 +17,75 @@
         <div><%= flight.flightNo %></div>
         <div>Departure: </div>
         <div><%= flight.departs%></div>
+
+    </section>
+    <!-- new markup below -->
+    <br><br><h2>Destinations</h2>
+    <form id="destination-form" method="POST"
+      action="/flights/<%= flight._id %>/destinations">
+      <label>Airport:</label>
+      <select name="airport">
+          <option value="DAL">DAL</option>
+          <option value="AUS">AUS</option>
+          <option value="LAX">LAX</option>
+          <option value="SEA">SEA</option>
+    </select>
+      <input type="datetime-local" name="arrival" id="date">
+      <input type="submit" value="Add Destination">
+    </form>
+
+    <% if (flight.destinations.length) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Airport</th>
+              <th>Arrival</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% flight.destinations.forEach(function(f) { %>
+              <tr>
+                <td><%= f.airport %></td>
+                <td><%= f.arrival %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <h5>No Destinations</h5>
+      <% } %>
+
+      <% if (flight.tickets.length) { %>
+        <table id="tickets">
+            <thead>
+                <tr>
+                    <th id="header" colspan="3">Tickets for Flight <%= flight.flightNo %></th>
+                </tr>
+                <tr>
+                    <th class="hd">Seat No.</th>
+                    <th class="hd">Price</th>
+                    <th class="hd" id="del-ticket-header">Delete Ticket</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% flight.tickets.forEach(function(ticket, ticketId) { %>
+                <tr>
+                    <td><%= ticket.seat %></td>
+                    <td><%= ticket.price %></td>
+                    
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% } else { %>
+            <h5>No Tickets Added Yet</h5>
+        <% } %>
+
+      <a href="/flights/<%= flight._id %>/tickets/new">New Ticket</a>
+
+
 </body>
 
 </html>
